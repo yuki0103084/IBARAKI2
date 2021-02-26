@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ibaraki2</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/484e6509e8.js" crossorigin="anonymous"></script>
+
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white p-2 shadow-sm ">
+       <%= link_to root_path do %>
+       <i class="fas fa-city fa-lg city_pink"></i>
+    <% end %>
+    <h4><strong><%= link_to 'ibaraki', root_path, class: "navbar-brand" %></strong></h4>
+  
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <% if user_signed_in? %>
+      <div class="collapse navbar-collapse justify-content-end" id="Navber">
+          <ul class="navbar-nav">
+             <li class="nav-item">
+             <%= link_to 'マイページ', user_path(current_user), class: "nav-link" %>
+             </li>
+             <li class="nav-item">
+             <%= link_to '新規投稿', "#", class: "nav-link" %>
+             </li>
+             <li class="nav-item">
+             <%= link_to '投稿一覧', "#", class: "nav-link" %>
+             </li>
+             <li class="nav-item">
+             <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-link" %>
+             </li>
+          </ul>
+      </div>
+      <% else %>
+      <div class="collapse navbar-collapse justify-content-end" id="Navber">
+          <ul class="navbar-nav">
+          <li class="nav-item">
+          <%= link_to 'ログイン', new_user_session_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+          <%= link_to '新規登録', new_user_registration_path, class: "nav-link" %>
+          </li>
+          </ul>
+          </div>
+      <% end %>
+      </nav>
+
+      <% if flash[:notice] %>
+      <div class="alert alert-primary" role="alert"><strong><%= notice %></strong></div>
+    <% end %>
+    <% if flash[:alert] %>
+      <div class="alert alert-danger" role="alert"><strong><%= alert %></strong></div>
+    <% end %>
+
+    <%= yield %>
+  </body>
+</html>
